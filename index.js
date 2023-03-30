@@ -1,49 +1,23 @@
 import { client } from "./mongoconnect.js";
+import { fortuneCookie } from "./mongoconnect.js";
 
 //create an instance of Mongo
 // const client = new MongoClient(MONGOURI)
 
 //connect to the client
-client.connect();
+// client.connect();
 
 //connect to db- or create if there is none
 const database = client.db("products");
 
 //connect to collection -or create if none
-const collection = database.collection("fruits");
+//const collection = database.collection("fruits");
 
-const addFruit = async () => {
-  const myFruit = {
-    name: "pear",
-    taste: "juicy",
-    price: 2,
-    stock: 100,
-  };
-  try {
-    await client.connect();
-    const addedFruit = await collection.insertOne(myFruit);
-  } catch (error) {
-    console.log(error);
-  } finally {
-    await client.close;
-  }
 
-  // const addedFruit = await collection.insertOne(myFruit)
-  // console.log(addedFruit)
-};
-addFruit();
 
-const editfruit = async () => {
-  //collection.findOner({name:'Pear'})
-  const updatedFruit = await collection.findOne(
-    { name: "pineapple" },
-    { $set: { name: "Pear" } }
-  );
 
-  console.log(updatedFruit);
-};
 
-//editfruit()
+
 const GetAllFruits = async () => {
   try {
     const allFruits = await collection.find().toArray();
@@ -67,7 +41,7 @@ const addFruitAnother = async () => {
   console.log(addedFruit);
 };
 
-addFruitAnother();
+// addFruitAnother();
 
 const getAllFruits = async () => {
   const allFruits = await collection.find().toArray();

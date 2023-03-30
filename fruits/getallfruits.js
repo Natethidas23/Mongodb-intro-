@@ -1,13 +1,16 @@
-import { client,fruitCollection } from "../mongoconnect.js";
-client.connect();
+import { client, fruitCollection } from "../mongoconnect.js";
+
 const GetAllFruits = async () => {
-    try {
-      const allFruits = await fruitCollection.find().toArray();
-      console.log(allFruits);
-    } catch (error) {
-      console.log(allFruits);
-    } finally {
-      await client.close();
-    }
-  };
-  GetAllFruits();
+  try {
+    await client.connect();
+    const allFruits = await fruitCollection.find().toArray();
+    console.log(allFruits);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    await client.close();
+  }
+};
+GetAllFruits();
+
+// this is a test for github
